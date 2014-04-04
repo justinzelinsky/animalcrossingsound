@@ -1,0 +1,19 @@
+{
+   "background": {
+    "page" : "background.html"
+  },
+   "browser_action": {
+      "default_title" : "Animal Crossing Music"
+   },
+   "description"  : "Animal Crossing music in your browser 24 hours a day!",
+   "name" : "Animal Crossing Music",
+   "version"  : "2.0",
+   "manifest_version": 2,
+   "browser_action": {
+    "default_icon"  : "Leaf.png"
+   },
+   "icons": {
+      "128": "ACLogo.png"
+   },
+   "author": "Justin Zelinsky"
+}

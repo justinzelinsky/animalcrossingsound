@@ -1,19 +1,19 @@
-{
-   "background": {
-    "page" : "background.html"
-  },
-   "browser_action": {
-      "default_title" : "Animal Crossing Music"
+{  
+   "background":{  
+      "page":"background.html"
    },
-   "description"  : "Animal Crossing music in your browser 24 hours a day!",
-   "name" : "Animal Crossing Music",
-   "version"  : "2.0",
-   "manifest_version": 2,
-   "browser_action": {
-    "default_icon"  : "Leaf.png"
+   "browser_action":{  
+      "default_title":"Animal Crossing Music"
    },
-   "icons": {
-      "128": "ACLogo.png"
+   "description":"Animal Crossing music in your browser 24 hours a day!",
+   "name":"Animal Crossing Music",
+   "version":"2.0",
+   "manifest_version":2,
+   "browser_action":{  
+      "default_icon":"images/Leaf.png"
    },
-   "author": "Justin Zelinsky"
+   "icons":{  
+      "128":"images/ACLogo.png"
+   },
+   "author":"Justin Zelinsky"
 }

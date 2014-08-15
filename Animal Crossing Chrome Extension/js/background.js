@@ -8,20 +8,8 @@ $(document).ready(function() {
         music.play();
     }
 
-    function getCurrentSong() {
-        var curr = new Date();
-        var hour = curr.getHours();
-        var period = hour < 12 ? "a" : "p";
-        if (hour == 0) {
-            hour = 12;
-            period = "a";
-        }
-        if (hour > 12) {
-            hour -= 12;
-        }
-
-        var song = "songs/" + hour + "-" + period + "m\.mp3";
-        return song;
+    function getCurrentSong(){
+        return "songs/" + new Date().getHours() + ".mp3";
     }
 
     chrome.browserAction.onClicked.addListener(function(tab) {

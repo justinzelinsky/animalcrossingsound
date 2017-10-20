@@ -1,33 +1,30 @@
-$(document).ready(function() {
-    var on = false;
-    var music = $('#acMusic');
-
-    function turnOn() {
-        music.prop('src', getCurrentSong());
-        music.trigger('play');
-    }
-
+document.addEventListener('DOMContentLoaded', function(event) {
+    let on = false;
+    const animalCrossing = document.getElementById('acMusic');
+    
     function getCurrentSong() {
-        return 'songs/' + new Date().getHours() + '.mp3';
+        const hours = new Date().getHours();
+        return 'songs/' + hours + '.mp3';
     }
 
     chrome.browserAction.onClicked.addListener(function(tab) {
         if (on) {
-            music.trigger('pause');
+            animalCrossing.pause();
         } else {
-            turnOn();
+            animalCrossing.setAttribute('src', getCurrentSong());
+            animalCrossing.play();
         }
         on = !on;
     });
-
-    var loop = setInterval(function() {
-        var song = getCurrentSong();
-        var musicSrc = music.prop('src');
-
-        if (song !== musicSrc && on) {
-            music.prop('src', song);
-            music.prop('loop', true);
-            music.trigger('play');
+    
+    setInterval(function() {
+        if (on) {
+            const song = getCurrentSong();
+            const playingSong = animalCrossing.getAttribute('src');
+            if (song !== playingSong) {
+                animalCrossing.setAttribute('src', song);
+                animalCrossing.play();
+            }
         }
-    }, 60000);
+    }, 60 * 1000); // every minute, check if we need to change the song
 });

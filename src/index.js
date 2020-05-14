@@ -1,32 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const animalCrossing = document.getElementById('acMusic');
+const animalCrossingAudio = document.createElement('audio');
+animalCrossingAudio.loop = 'true';
 
-  let on = false;
+document.body.appendChild(animalCrossingAudio);
 
-  const getCurrentSong = () => {
-    const hours = new Date().getHours();
-    return `assets/audio/${hours}.mp3`;
-  };
+const ONE_MINUTE = 60 * 1000;
 
-  chrome.browserAction.onClicked.addListener(() => {
-    if (on) {
-      animalCrossing.pause();
-    } else {
-      animalCrossing.setAttribute('src', getCurrentSong());
-      animalCrossing.play();
-    }
-    on = !on;
-  });
+let on = false;
+let intervalId = null;
 
-  setInterval(() => {
-    if (on) {
-      const song = getCurrentSong();
-      const playingSong = animalCrossing.getAttribute('src');
+function getCurrentSong() {
+  const hours = new Date().getHours();
+  return chrome.runtime.getURL(`src/assets/audio/${hours}.mp3`);
+}
 
-      if (song !== playingSong) {
-        animalCrossing.setAttribute('src', song);
-        animalCrossing.play();
-      }
-    }
-  }, 60 * 1000);
+function checkForNextSong() {
+  const song = getCurrentSong();
+  const playingSong = animalCrossingAudio.getAttribute('src');
+
+  if (song !== playingSong) {
+    animalCrossingAudio.setAttribute('src', song);
+    animalCrossingAudio.play();
+  }
+}
+
+chrome.browserAction.onClicked.addListener(function() {
+  if (on) {
+    animalCrossingAudio.pause();
+    clearInterval(intervalId);
+  } else {
+    animalCrossingAudio.setAttribute('src', getCurrentSong());
+    animalCrossingAudio.play();
+    setInterval(checkForNextSong, ONE_MINUTE);
+  }
+  on = !on;
 });
+
+

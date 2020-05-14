@@ -1,6 +1,6 @@
 {
   "background": {
-    "page": "src/index.html"
+    "scripts": ["src/index.js"]
   },
   "browser_action": {
     "default_icon": "src/assets/images/Leaf.png",
